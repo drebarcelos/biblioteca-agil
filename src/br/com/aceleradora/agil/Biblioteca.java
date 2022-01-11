@@ -47,6 +47,9 @@ public class Biblioteca {
 		case 1:
 			retirarLivro();
 			break;
+		case 2:
+			devolverLivro();
+			break;
 		case 3:
 			doarLivro();
 			break;
@@ -83,6 +86,21 @@ public class Biblioteca {
 		
 		System.out.println("\nLivro " + livroSelecionadoParaAlugar.getTitulo() + " alugado por " + livroSelecionadoParaAlugar.getEmprestadoPara()
 		+ " com sucesso!\n" + livroSelecionadoParaAlugar);
+	}
+	
+	private void devolverLivro() {
+		int numero;
+		
+		System.out.println("Digite o numero do livro que deseja devolver: ");
+		numero = SCANNER.nextInt();
+		
+		Livro livroSelecionadoParaDevolver = repositorioDeLivros.getLivroPeloNumero(numero);
+		System.out.println("\nLivro selecionado: " + livroSelecionadoParaDevolver);
+		
+		livroSelecionadoParaDevolver.setStatus("Disponivel");
+		livroSelecionadoParaDevolver.setEmprestadoPara(null);
+		
+		System.out.println("\nLivro " + livroSelecionadoParaDevolver.getTitulo() + " devolvido com sucesso!\n" + livroSelecionadoParaDevolver);
 	}
 	
 	private void doarLivro() {
