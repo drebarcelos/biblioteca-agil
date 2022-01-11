@@ -47,6 +47,9 @@ public class Biblioteca {
 		case 3:
 			doarLivro();
 			break;
+		case 4:
+			listarLivros();
+			break;
 		default:
 			opcaoInvalida();
 			break;
@@ -81,6 +84,13 @@ public class Biblioteca {
 		repositorioDeLivros.adicionaLivro(livro);
 		
 		System.out.println(livro);
+	}
+	
+	private void listarLivros() {
+		System.out.println("Lista de livros: ");
+		repositorioDeLivros.getTodosLivros().forEach(livro -> {
+			System.out.println(livro);
+		});
 	}
 	
 	private void opcaoInvalida() {

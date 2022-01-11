@@ -24,7 +24,10 @@ public class RepositorioDeLivrosEmMemoria implements RepositorioDeLivros {
 	public void adicionaLivro(Livro livro) {
 		this.livros.add(livro);
 	}
-
 	
+	@Override
+	public List<Livro> getTodosLivros() {
+		return livros;
+	}
 	
 }
