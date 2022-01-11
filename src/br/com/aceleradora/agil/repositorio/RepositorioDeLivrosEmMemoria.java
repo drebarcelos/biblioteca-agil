@@ -30,4 +30,12 @@ public class RepositorioDeLivrosEmMemoria implements RepositorioDeLivros {
 		return livros;
 	}
 	
+	public Livro getLivroPeloNumero(int numero) {
+		for (Livro livro : livros) {
+			if(livro.getNumero() == numero) {
+				return livro;
+			}
+		}
+		throw new RuntimeException("Livro não encontrado!");
+	}	
 }

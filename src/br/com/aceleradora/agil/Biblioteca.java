@@ -44,6 +44,9 @@ public class Biblioteca {
 		case 0:
 			sair();
 			break;
+		case 1:
+			retirarLivro();
+			break;
 		case 3:
 			doarLivro();
 			break;
@@ -59,6 +62,27 @@ public class Biblioteca {
 	private void sair() {
 		System.out.println("Programa finalizado com sucesso!");
 		System.exit(0);
+	}
+	
+	private void retirarLivro() {
+		String nome;
+		int numero;
+		
+		System.out.println("\nDigite o numero do livro que deseja alugar: ");
+		numero = SCANNER.nextInt();
+		SCANNER.nextLine();
+		
+		Livro livroSelecionadoParaAlugar = repositorioDeLivros.getLivroPeloNumero(numero);
+		System.out.println("\nLivro selecionado: " + livroSelecionadoParaAlugar);
+		
+		System.out.println("\nDigite seu nome: ");
+		nome = SCANNER.nextLine();
+		
+		livroSelecionadoParaAlugar.setStatus("Indisponivel");
+		livroSelecionadoParaAlugar.setEmprestadoPara(nome);
+		
+		System.out.println("\nLivro " + livroSelecionadoParaAlugar.getTitulo() + " alugado por " + livroSelecionadoParaAlugar.getEmprestadoPara()
+		+ " com sucesso!\n" + livroSelecionadoParaAlugar);
 	}
 	
 	private void doarLivro() {

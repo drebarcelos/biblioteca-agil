@@ -9,5 +9,7 @@ public interface RepositorioDeLivros {
 	void adicionaLivro(Livro livro);
 	
 	List<Livro> getTodosLivros();
+	
+	Livro getLivroPeloNumero(int numero);
 
 }
