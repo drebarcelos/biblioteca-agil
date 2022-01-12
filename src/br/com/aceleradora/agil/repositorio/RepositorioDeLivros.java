@@ -10,6 +10,6 @@ public interface RepositorioDeLivros {
 	
 	List<Livro> getTodosLivros();
 	
-	Livro getLivroPeloNumero(int numero);
+	Livro getLivroPeloNumero(Integer numero);
 
 }

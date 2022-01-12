@@ -68,18 +68,16 @@ public class Biblioteca {
 	}
 	
 	private void retirarLivro() {
-		String nome;
-		int numero;
-		
+
 		System.out.println("\nDigite o numero do livro que deseja alugar: ");
-		numero = SCANNER.nextInt();
+		Integer numero = SCANNER.nextInt();
 		SCANNER.nextLine();
 		
 		Livro livroSelecionadoParaAlugar = repositorioDeLivros.getLivroPeloNumero(numero);
 		System.out.println("\nLivro selecionado: " + livroSelecionadoParaAlugar);
 		
 		System.out.println("\nDigite seu nome: ");
-		nome = SCANNER.nextLine();
+		String nome = SCANNER.nextLine();
 		
 		livroSelecionadoParaAlugar.setStatus("Indisponivel");
 		livroSelecionadoParaAlugar.setEmprestadoPara(nome);
@@ -89,10 +87,9 @@ public class Biblioteca {
 	}
 	
 	private void devolverLivro() {
-		int numero;
 		
 		System.out.println("Digite o numero do livro que deseja devolver: ");
-		numero = SCANNER.nextInt();
+		Integer numero = SCANNER.nextInt();
 		
 		Livro livroSelecionadoParaDevolver = repositorioDeLivros.getLivroPeloNumero(numero);
 		System.out.println("\nLivro selecionado: " + livroSelecionadoParaDevolver);
@@ -104,23 +101,19 @@ public class Biblioteca {
 	}
 	
 	private void doarLivro() {
-		int numero;
-		String titulo;
-		String autor;
-		int ano;
 		
 		System.out.println("Digite o numero do livro: ");
-		numero = SCANNER.nextInt();
+		Integer numero = SCANNER.nextInt();
 		SCANNER.nextLine();
 		
 		System.out.println("Digite o título do livro: ");
-		titulo = SCANNER.nextLine();
+		String titulo = SCANNER.nextLine();
 		
 		System.out.println("Digite o autor do livro: ");
-		autor = SCANNER.nextLine();
+		String autor = SCANNER.nextLine();
 		
 		System.out.println("Digite o ano do livro: ");
-		ano = SCANNER.nextInt();
+		Integer ano = SCANNER.nextInt();
 		
 		Livro livro = new Livro(numero, titulo, autor, ano);
 		repositorioDeLivros.adicionaLivro(livro);

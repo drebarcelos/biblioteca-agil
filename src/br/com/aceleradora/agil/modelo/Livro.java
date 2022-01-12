@@ -10,10 +10,10 @@ import java.util.Objects;
  */
 
 public class Livro {
-	private int numero;
+	private Integer numero;
 	private String titulo;
 	private String autor;
-	private int ano;
+	private Integer ano;
 	private String status;
 	private String emprestadoPara;
 	
@@ -27,7 +27,7 @@ public class Livro {
 	 * 
 	 */
 	
-	public Livro(int numero, String titulo, String autor, int ano) {
+	public Livro(Integer numero, String titulo, String autor, Integer ano) {
 		this.numero = numero;
 		this.titulo = titulo;
 		this.autor = autor;
@@ -36,7 +36,7 @@ public class Livro {
 		this.emprestadoPara = null;
 	}
 	
-	public int getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
 	
@@ -60,7 +60,7 @@ public class Livro {
 		this.autor = autor;
 	}
 	
-	public int getAno() {
+	public Integer getAno() {
 		return ano;
 	}
 	
@@ -84,6 +84,8 @@ public class Livro {
 		this.emprestadoPara = emprestadoPara;
 	}
 
+	
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(ano, autor, emprestadoPara, numero, status, titulo);
@@ -98,11 +100,11 @@ public class Livro {
 		if (getClass() != obj.getClass())
 			return false;
 		Livro other = (Livro) obj;
-		return ano == other.ano && Objects.equals(autor, other.autor)
-				&& Objects.equals(emprestadoPara, other.emprestadoPara) && numero == other.numero
+		return Objects.equals(ano, other.ano) && Objects.equals(autor, other.autor)
+				&& Objects.equals(emprestadoPara, other.emprestadoPara) && Objects.equals(numero, other.numero)
 				&& Objects.equals(status, other.status) && Objects.equals(titulo, other.titulo);
 	}
-	
+
 	@Override
     public String toString() {
         return "\nNúmero: " + this.numero + "\nTítulo: " + this.titulo + "\nAutor: " + this.autor + "\nAno: " + this.ano +

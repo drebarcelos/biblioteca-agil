@@ -30,9 +30,9 @@ public class RepositorioDeLivrosEmMemoria implements RepositorioDeLivros {
 		return livros;
 	}
 	
-	public Livro getLivroPeloNumero(int numero) {
+	public Livro getLivroPeloNumero(Integer numero) {
 		for (Livro livro : livros) {
-			if(livro.getNumero() == numero) {
+			if(livro.getNumero().equals(numero)) {
 				return livro;
 			}
 		}
