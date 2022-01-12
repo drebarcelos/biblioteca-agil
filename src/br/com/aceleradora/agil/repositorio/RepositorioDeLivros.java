@@ -11,5 +11,4 @@ public interface RepositorioDeLivros {
 	List<Livro> getTodosLivros();
 	
 	Livro getLivroPeloNumero(Integer numero);
-
 }

@@ -68,6 +68,8 @@ public class Biblioteca {
 	}
 	
 	private void retirarLivro() {
+		
+		listarLivrosDisponiveis();
 
 		System.out.println("\nDigite o numero do livro que deseja alugar: ");
 		Integer numero = SCANNER.nextInt();
@@ -90,9 +92,20 @@ public class Biblioteca {
 		+ " com sucesso!\n" + livroSelecionadoParaAlugar);
 	}
 	
+	private void listarLivrosDisponiveis() {
+		System.out.println("Lista de livros disponiveis: ");
+		repositorioDeLivros.getTodosLivros().forEach(livro -> {
+			if(livro.isDisponivel()) {
+				System.out.println(livro);
+			}
+		});
+	}
+	
 	private void devolverLivro() {
 		
-		System.out.println("Digite o numero do livro que deseja devolver: ");
+		listarLivrosIndisponiveis();
+		
+		System.out.println("\nDigite o numero do livro que deseja devolver: ");
 		Integer numero = SCANNER.nextInt();
 		
 		Livro livroSelecionadoParaDevolver = repositorioDeLivros.getLivroPeloNumero(numero);
@@ -106,6 +119,15 @@ public class Biblioteca {
 		livroSelecionadoParaDevolver.setEmprestadoPara(null);
 		
 		System.out.println("\nLivro " + livroSelecionadoParaDevolver.getTitulo() + " devolvido com sucesso!\n" + livroSelecionadoParaDevolver);
+	}
+	
+	private void listarLivrosIndisponiveis() {
+		System.out.println("Lista de livros disponiveis para devolução: ");
+		repositorioDeLivros.getTodosLivros().forEach(livro -> {
+			if(livro.isIndiponivel()) {
+				System.out.println(livro);
+			}
+		});
 	}
 	
 	private void doarLivro() {
