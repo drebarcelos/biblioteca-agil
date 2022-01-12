@@ -28,7 +28,7 @@ public class Biblioteca {
 	}
 	
 	private void imprimeMenu() {
-		System.out.println("Digite (0) para sair do MENU");
+		System.out.println("\nDigite (0) para sair do MENU");
 		System.out.println("Digite (1) para retirar um livro");
 		System.out.println("Digite (2) para devolver um livro");
 		System.out.println("Digite (3) para doar um livro");
@@ -76,6 +76,10 @@ public class Biblioteca {
 		Livro livroSelecionadoParaAlugar = repositorioDeLivros.getLivroPeloNumero(numero);
 		System.out.println("\nLivro selecionado: " + livroSelecionadoParaAlugar);
 		
+		if(livroSelecionadoParaAlugar.isIndiponivel()) {
+			throw new RuntimeException("Livro " + livroSelecionadoParaAlugar.getNumero() + " não disponivel!");	
+		}
+		
 		System.out.println("\nDigite seu nome: ");
 		String nome = SCANNER.nextLine();
 		
@@ -94,6 +98,10 @@ public class Biblioteca {
 		Livro livroSelecionadoParaDevolver = repositorioDeLivros.getLivroPeloNumero(numero);
 		System.out.println("\nLivro selecionado: " + livroSelecionadoParaDevolver);
 		
+		if(livroSelecionadoParaDevolver.isDisponivel()) {
+			throw new RuntimeException("Livro " + livroSelecionadoParaDevolver.getNumero() + " não disponivel para devoluçao!");	
+		}
+		
 		livroSelecionadoParaDevolver.setStatus("Disponivel");
 		livroSelecionadoParaDevolver.setEmprestadoPara(null);
 		
@@ -102,11 +110,7 @@ public class Biblioteca {
 	
 	private void doarLivro() {
 		
-		System.out.println("Digite o numero do livro: ");
-		Integer numero = SCANNER.nextInt();
-		SCANNER.nextLine();
-		
-		System.out.println("Digite o título do livro: ");
+		System.out.println("Digite o título do livro que deseja doar: ");
 		String titulo = SCANNER.nextLine();
 		
 		System.out.println("Digite o autor do livro: ");
@@ -115,7 +119,11 @@ public class Biblioteca {
 		System.out.println("Digite o ano do livro: ");
 		Integer ano = SCANNER.nextInt();
 		
-		Livro livro = new Livro(numero, titulo, autor, ano);
+		Integer qtdLivros = repositorioDeLivros.getTodosLivros().size();
+		Livro ultimoLivro = repositorioDeLivros.getTodosLivros().get(qtdLivros -1);
+		Integer numeroNovoLivro = ultimoLivro.getNumero() +1;
+		
+		Livro livro = new Livro(numeroNovoLivro, titulo, autor, ano);
 		repositorioDeLivros.adicionaLivro(livro);
 		
 		System.out.println(livro);

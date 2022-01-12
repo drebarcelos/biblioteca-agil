@@ -36,11 +36,21 @@ public class Livro {
 		this.emprestadoPara = null;
 	}
 	
+	public Boolean isDisponivel() {
+		if(this.status.equals("Disponível")) {
+			return true;
+		} return false;
+	}
+	
+	public Boolean isIndiponivel(){
+		return !isDisponivel();
+	}
+	
 	public Integer getNumero() {
 		return numero;
 	}
 	
-	public void setNumero(int numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 	
@@ -64,7 +74,7 @@ public class Livro {
 		return ano;
 	}
 	
-	public void setAno(int ano) {
+	public void setAno(Integer ano) {
 		this.ano = ano;
 	}
 
@@ -84,8 +94,6 @@ public class Livro {
 		this.emprestadoPara = emprestadoPara;
 	}
 
-	
-	
 	@Override
 	public int hashCode() {
 		return Objects.hash(ano, autor, emprestadoPara, numero, status, titulo);
