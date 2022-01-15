@@ -10,6 +10,8 @@ import java.util.Objects;
  */
 
 public class Livro {
+	public static final String DISPONIVEL = "Disponível";
+	public static final String INDISPONIVEL = "Indisponível";
 	private Integer numero;
 	private String titulo;
 	private String autor;
@@ -32,12 +34,22 @@ public class Livro {
 		this.titulo = titulo;
 		this.autor = autor;
 		this.ano = ano;
-		this.status = "Disponível";
+		this.status = DISPONIVEL;
 		this.emprestadoPara = null;
 	}
 	
+	public Livro(Integer numero, String titulo, String autor, Integer ano, String status,
+			String emprestadoPara) {
+		this.numero = numero;
+		this.titulo = titulo;
+		this.autor = autor;
+		this.ano = ano;
+		this.status = status;
+		this.emprestadoPara = emprestadoPara;
+	}
+
 	public Boolean isDisponivel() {
-		if(this.status.equals("Disponível")) {
+		if(this.status.equals(DISPONIVEL)) {
 			return true;
 		} return false;
 	}
@@ -87,6 +99,9 @@ public class Livro {
 	}
 
 	public String getEmprestadoPara() {
+		if(this.emprestadoPara == null) {
+			return " ";
+		}
 		return emprestadoPara;
 	}
 
@@ -116,6 +131,10 @@ public class Livro {
 	@Override
     public String toString() {
         return "\nNúmero: " + this.numero + "\nTítulo: " + this.titulo + "\nAutor: " + this.autor + "\nAno: " + this.ano +
-        		"\nStatus: " + this.status + "\nEmprestado para: " + this.emprestadoPara;
+        		"\nStatus: " + this.status + "\nEmprestado para: " + getEmprestadoPara();
     }
+	
+	public String toStringFormatadoParaArquivo() {
+		return this.numero + "," + this.titulo + "," + this.autor + "," + this.ano + "," + this.status + "," + getEmprestadoPara();
+	}
 }

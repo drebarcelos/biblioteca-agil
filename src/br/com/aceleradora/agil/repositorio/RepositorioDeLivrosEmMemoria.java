@@ -37,5 +37,17 @@ public class RepositorioDeLivrosEmMemoria implements RepositorioDeLivros {
 			}
 		}
 		throw new RuntimeException("Livro não encontrado!");
+	}
+
+	@Override
+	public void alugarLivro(Livro livroSelecionadoParaAlugar, String nome) {
+		livroSelecionadoParaAlugar.setStatus(Livro.INDISPONIVEL);
+		livroSelecionadoParaAlugar.setEmprestadoPara(nome);
+	}
+
+	@Override
+	public void devolverLivro(Livro livroSelecionadoParaDevolver, String nome) {
+		livroSelecionadoParaDevolver.setStatus(Livro.DISPONIVEL);
+		livroSelecionadoParaDevolver.setEmprestadoPara(null);		
 	}	
 }

@@ -11,4 +11,8 @@ public interface RepositorioDeLivros {
 	List<Livro> getTodosLivros();
 	
 	Livro getLivroPeloNumero(Integer numero);
+	
+	void alugarLivro(Livro livroSelecionadoParaAlugar, String nome);
+	
+	void devolverLivro(Livro livroSelecionadoParaDevolver, String nome);
 }

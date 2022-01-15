@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import br.com.aceleradora.agil.modelo.Livro;
 import br.com.aceleradora.agil.repositorio.RepositorioDeLivros;
-import br.com.aceleradora.agil.repositorio.RepositorioDeLivrosEmMemoria;
+import br.com.aceleradora.agil.repositorio.RepositorioDeLivrosEmArquivo;
 
 public class Biblioteca {
 	private static final Scanner SCANNER = new Scanner(System.in);
@@ -13,7 +13,7 @@ public class Biblioteca {
 	private RepositorioDeLivros repositorioDeLivros;
 	
 	public Biblioteca() {
-		this.repositorioDeLivros = new RepositorioDeLivrosEmMemoria();
+		this.repositorioDeLivros = new RepositorioDeLivrosEmArquivo();
 	}
 	
 	public void iniciar() {
@@ -40,26 +40,31 @@ public class Biblioteca {
 	}
 	
 	private void executaOpcaoEscolhida(int opcao) {
-		switch (opcao) {
-		case 0:
-			sair();
-			break;
-		case 1:
-			retirarLivro();
-			break;
-		case 2:
-			devolverLivro();
-			break;
-		case 3:
-			doarLivro();
-			break;
-		case 4:
-			listarLivros();
-			break;
-		default:
-			opcaoInvalida();
-			break;
-		}	
+		try {
+			switch (opcao) {
+				case 0:
+					sair();
+					break;
+				case 1:
+					retirarLivro();
+					break;
+				case 2:
+					devolverLivro();
+					break;
+				case 3:
+					doarLivro();
+					break;
+				case 4:
+					listarLivros();
+					break;
+				default:
+					opcaoInvalida();
+					break;
+			}
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+			return;
+		}
 	}
 	
 	private void sair() {
@@ -85,8 +90,7 @@ public class Biblioteca {
 		System.out.println("\nDigite seu nome: ");
 		String nome = SCANNER.nextLine();
 		
-		livroSelecionadoParaAlugar.setStatus("Indisponivel");
-		livroSelecionadoParaAlugar.setEmprestadoPara(nome);
+		repositorioDeLivros.alugarLivro(livroSelecionadoParaAlugar, nome);
 		
 		System.out.println("\nLivro " + livroSelecionadoParaAlugar.getTitulo() + " alugado por " + livroSelecionadoParaAlugar.getEmprestadoPara()
 		+ " com sucesso!\n" + livroSelecionadoParaAlugar);
@@ -115,14 +119,13 @@ public class Biblioteca {
 			throw new RuntimeException("Livro " + livroSelecionadoParaDevolver.getNumero() + " não disponivel para devoluçao!");	
 		}
 		
-		livroSelecionadoParaDevolver.setStatus("Disponivel");
-		livroSelecionadoParaDevolver.setEmprestadoPara(null);
+		repositorioDeLivros.devolverLivro(livroSelecionadoParaDevolver, null);
 		
 		System.out.println("\nLivro " + livroSelecionadoParaDevolver.getTitulo() + " devolvido com sucesso!\n" + livroSelecionadoParaDevolver);
 	}
 	
 	private void listarLivrosIndisponiveis() {
-		System.out.println("Lista de livros disponiveis para devolução: ");
+		System.out.println("Lista de livros para devolução: ");
 		repositorioDeLivros.getTodosLivros().forEach(livro -> {
 			if(livro.isIndiponivel()) {
 				System.out.println(livro);
